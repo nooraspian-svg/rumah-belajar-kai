@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Rumah Belajar Kai: media belajar, latihan, hasil, dan lomba adu cepat pecahan.">
+<title>Rumah Belajar Kai</title>
+<style>
+:root{--ink:#183153;--blue:#2467a6;--sky:#eaf6ff;--sun:#ffdc75;--coral:#ff9e80;--mint:#bdebd8;--paper:#fffdf7;--muted:#52677b;--purple:#7a65ad}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:linear-gradient(140deg,#e6f6ff,#fff5d7);min-height:100vh}
+header{padding:23px 15px 20px;text-align:center;background:var(--ink);color:white;border-bottom:7px solid var(--sun)}header .logo{font-size:2.5rem}header h1{margin:4px 0;font-size:clamp(2rem,6vw,3.1rem)}header p{margin:8px auto 0;max-width:650px;line-height:1.5}
+main{max-width:1000px;margin:auto;padding:15px}.panel{background:var(--paper);border:1px solid #d6e6f1;border-radius:21px;padding:clamp(15px,3vw,25px);margin:14px 0;box-shadow:0 8px 22px #18315310}
+h2{margin-top:0}.nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-top:20px}
+button{font:inherit;font-weight:750;border:0;border-radius:13px;padding:12px 15px;cursor:pointer;background:var(--sun);color:var(--ink);box-shadow:0 3px 0 #d5b24d}button:active{transform:translateY(2px);box-shadow:none}button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}button.primary{background:var(--blue);color:white;box-shadow:0 3px 0 #17436d}button.mint{background:var(--mint)}button.coral{background:var(--coral)}button.purple{background:var(--purple);color:white;box-shadow:0 3px 0 #51427a}
+.hidden{display:none!important}.hero{display:grid;grid-template-columns:1fr;gap:12px;align-items:center}.badge{text-align:center;font-size:1.2rem;line-height:1.8;background:var(--sky);padding:20px;border-radius:18px}
+.small{color:var(--muted);font-size:.93rem;line-height:1.6}.formula,.question{text-align:center;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:850;margin:20px 0}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.step{background:var(--sky);padding:14px;border-radius:15px;border:1px solid #c9e5f7}.step strong{display:block;margin-bottom:7px}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:9px}.options button{background:white;border:2px solid #c6dfef;box-shadow:none}.options button:disabled{opacity:.7;cursor:default}
+.feedback{font-weight:750;line-height:1.5;min-height:28px;margin:13px 0}.good{color:#167347}.bad{color:#a63a3a}.row{display:flex;gap:9px;align-items:center;justify-content:center;flex-wrap:wrap}.formrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}input,select{font:inherit;padding:10px;border:2px solid #b8d1e2;border-radius:10px;background:white;color:var(--ink)}input{width:100%;max-width:280px}.statrow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.stat{background:var(--sky);border-radius:13px;padding:11px 16px;text-align:center;min-width:105px}.stat b{display:block;font-size:1.35rem}.progress{height:9px;background:#dbeaf3;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:var(--blue)}
+table{width:100%;border-collapse:collapse;margin:12px 0}th,td{padding:10px;border-bottom:1px solid #d9e7ef;text-align:left}th{background:var(--sky)}.rank{font-size:1.2rem}.players{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.player{padding:14px;background:#fff;border:2px solid #d6e6f1;border-radius:15px}.player.active{border-color:var(--coral);background:#fff5ef}.player h3{margin:0 0 6px}.player .points{font-size:1.6rem;font-weight:850}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.9rem}
+@media(min-width:700px){.hero{grid-template-columns:1.2fr .8fr}}
+</style>
+</head>
+<body>
+<header><div class="logo">🌞 🌻</div><h1>Rumah Belajar Kai</h1><p><b>Belajar Ceria, Berkarya, Berbagi</b><br>Mulai dari kelas 6C, terbuka untuk semua anak dan orang tua.</p></header>
+<main>
+<section id="home" class="panel">
+ <div class="hero"><div><h2>Selamat datang di Rumah Belajar Kai!</h2><p>Belajar pelan-pelan, berlatih sampai paham, lalu tantang teman dalam lomba adu cepat.</p>
+ <div class="nav">
+ <button class="primary" onclick="show('materi')">📘 Materi</button><button class="mint" onclick="startPractice()">✏️ Kerjakan</button><button onclick="show('hasil')">📊 Hasil</button><button class="coral" onclick="show('raceSetup')">⚡ Adu Cepat 3 Pemain</button>
+ </div></div><div class="badge">🌻 <b>Ruang belajar bersama</b><br>🧠 Pahami materi<br>✏️ Kerjakan soal<br>🏆 Lomba sehat bersama teman</div></div>
+ <p class="small">Versi awal berfokus pada Matematika: penjumlahan pecahan dengan penyebut berbeda. Mata pelajaran lain dapat ditambahkan bertahap.</p>
+</section>
+<section id="materi" class="panel hidden"><h2>📘 Materi Pecahan</h2><p>Jika penyebut dua pecahan berbeda, samakan penyebut terlebih dahulu. Gunakan KPK dari kedua penyebut.</p><div class="formula">½ + ⅓ = ?</div><div class="steps"><div class="step"><strong>1. Cari KPK</strong>KPK dari 2 dan 3 adalah 6.</div><div class="step"><strong>2. Samakan penyebut</strong>½ = 3/6 dan ⅓ = 2/6.</div><div class="step"><strong>3. Jumlahkan</strong>3/6 + 2/6 = 5/6.</div></div><p class="formula">Jadi, ½ + ⅓ = ⅚</p><p class="small">Ingat: samakan penyebut, jumlahkan pembilang, lalu sederhanakan jika memungkinkan.</p><button onclick="show('home')">← Beranda</button></section>
+<section id="kerjakan" class="panel hidden"><h2>✏️ Kerjakan Latihan</h2><p class="small">10 soal pilihan ganda dipilih secara acak dari bank 40 soal. Setiap jawaban benar bernilai 10 poin.</p><div class="progress"><div id="pbar" class="bar"></div></div><div id="practiceArea"></div><div id="pfb" class="feedback" aria-live="polite"></div><div class="row"><button id="pnext" class="primary" onclick="nextPractice()" disabled>Soal berikutnya →</button><button onclick="show('home')">Keluar</button></div></section>
+<section id="hasil" class="panel hidden"><h2>📊 Hasil Belajar</h2><div class="statrow"><div class="stat">Latihan terakhir<b id="lastScore">Belum ada</b></div><div class="stat">Jawaban benar<b id="lastCorrect">—</b></div><div class="stat">Adu cepat terbaik<b id="bestRace">Belum ada</b></div></div><div id="resultDetail" class="small" style="margin-top:15px">Selesaikan latihan untuk melihat hasil.</div><p class="small">Hasil disimpan di browser/perangkat ini saja. Belum ada akun atau sinkronisasi online.</p><button class="primary" onclick="startPractice()">Kerjakan lagi</button> <button onclick="show('home')">← Beranda</button></section>
+<section id="raceSetup" class="panel hidden"><h2>⚡ Siapkan Lomba Adu Cepat</h2><p>Masukkan nama tiga pemain. Mereka bermain bergiliran pada perangkat yang sama. Setiap pemain mendapat 60 detik untuk menjawab sebanyak mungkin soal. Jawaban benar mendapat 10 poin.</p><div class="formrow"><input id="n1" maxlength="24" placeholder="Nama pemain 1" value="Pemain 1" aria-label="Nama pemain 1"><input id="n2" maxlength="24" placeholder="Nama pemain 2" value="Pemain 2" aria-label="Nama pemain 2"><input id="n3" maxlength="24" placeholder="Nama pemain 3" value="Pemain 3" aria-label="Nama pemain 3"></div><div class="row" style="margin-top:15px"><button class="coral" onclick="startTournament()">Mulai Lomba 3 Pemain!</button><button onclick="show('home')">← Beranda</button></div><p class="small">Agar adil, setiap pemain bermain dengan durasi yang sama. Catat nama dengan benar sebelum mulai.</p></section>
+<section id="race" class="panel hidden"><h2>🏁 Lomba Adu Cepat Pecahan</h2><div class="statrow"><div class="stat">Pemain<b id="currentName">—</b></div><div class="stat">Waktu tersisa<b id="timer">60</b></div><div class="stat">Skor<b id="rscore">0</b></div><div class="stat">Soal dijawab<b id="rcount">0</b></div></div><div class="progress"><div id="rbar" class="bar"></div></div><div id="raceArea"></div><div id="rfb" class="feedback" aria-live="polite"></div></section>
+<section id="leaderboard" class="panel hidden"><h2>🏆 Papan Peringkat</h2><p>Inilah hasil lomba tiga pemain pada perangkat ini.</p><table><thead><tr><th>Peringkat</th><th>Nama</th><th>Skor</th><th>Soal dijawab</th></tr></thead><tbody id="leaderRows"></tbody></table><div class="row"><button class="coral" onclick="show('raceSetup')">Lomba Lagi</button><button onclick="show('home')">Beranda</button></div><p class="small">Peringkat ini hanya untuk satu sesi di perangkat yang sama. Untuk lomba jarak jauh dari perangkat berbeda, diperlukan sistem online/server.</p></section>
+<section class="panel small"><b>Tentang Rumah Belajar Kai:</b> prototipe pembelajaran yang dirancang untuk diuji dan dikembangkan bertahap. Belum dipublikasikan ke internet; untuk blog, file ini perlu diunggah ke layanan hosting yang mendukung HTML.</section>
+</main><footer>Rumah Belajar Kai • 🌞🌻 • Belajar Ceria, Berkarya, Berbagi</footer>
+<script>
+const questionBank=[
+{q:"½ + ⅓ = ?",o:["2/5","5/6","1/6","3/6"],a:"5/6",w:"KPK 2 dan 3 adalah 6. Jadi 3/6 + 2/6 = 5/6."},
+{q:"⅔ + ¼ = ?",o:["3/7","11/12","3/12","5/12"],a:"11/12",w:"KPK 3 dan 4 adalah 12. Jadi 8/12 + 3/12 = 11/12."},
+{q:"⅜ + ¼ = ?",o:["4/12","5/8","1/2","1/8"],a:"5/8",w:"¼ = 2/8, jadi 3/8 + 2/8 = 5/8."},
+{q:"⅖ + ⅙ = ?",o:["3/11","17/30","7/30","13/30"],a:"17/30",w:"KPK 5 dan 6 adalah 30. Jadi 12/30 + 5/30 = 17/30."},
+{q:"⅚ + ⅓ = ?",o:["7/6","6/9","1/2","1"],a:"7/6",w:"⅓ = 2/6. Jadi 5/6 + 2/6 = 7/6 = 1 1/6."},
+{q:"⅔ + ⅙ = ?",o:["3/9","5/6","4/6","1/2"],a:"5/6",w:"⅔ = 4/6. Jadi 4/6 + 1/6 = 5/6."},
+{q:"⅕ + ⅖ = ?",o:["3/10","3/5","2/5","3/7"],a:"3/5",w:"Penyebut sama, jadi 1/5 + 2/5 = 3/5."},
+{q:"¾ + ⅛ = ?",o:["4/12","7/8","5/8","1"],a:"7/8",w:"¾ = 6/8. Jadi 6/8 + 1/8 = 7/8."},
+{q:"⅖ + ⅘ = ?",o:["6/10","6/5","4/10","1"],a:"6/5",w:"2/5 + 4/5 = 6/5 = 1 1/5."},
+{q:"⅜ + ⅙ = ?",o:["4/14","13/24","5/14","1/2"],a:"13/24",w:"KPK 8 dan 6 adalah 24. Jadi 9/24 + 4/24 = 13/24."}
+,
+ {q:"¼ + ⅓ = ?",o:["5/12","7/12","2/7","3/12"],a:"7/12",w:"KPK 4 dan 3 adalah 12. Jadi 3/12 + 4/12 = 7/12."},
+ {q:"²⁄₇ + ¹⁄₁₄ = ?",o:["3/21","5/14","1/2","4/14"],a:"5/14",w:"2/7 = 4/14. Jadi 4/14 + 1/14 = 5/14."},
+ {q:"³⁄₁₀ + ⅕ = ?",o:["4/15","1/2","5/10","3/15"],a:"1/2",w:"1/5 = 2/10. Jadi 3/10 + 2/10 = 5/10 = 1/2."},
+ {q:"⁵⁄₁₂ + ⅙ = ?",o:["6/18","7/12","1/2","5/18"],a:"7/12",w:"1/6 = 2/12. Jadi 5/12 + 2/12 = 7/12."},
+ {q:"⅛ + ¼ = ?",o:["2/12","3/8","1/4","5/8"],a:"3/8",w:"1/4 = 2/8. Jadi 1/8 + 2/8 = 3/8."},
+ {q:"²⁄₉ + ⅓ = ?",o:["3/12","5/9","1/3","4/9"],a:"5/9",w:"1/3 = 3/9. Jadi 2/9 + 3/9 = 5/9."},
+ {q:"³⁄₇ + ²⁄₇ = ?",o:["5/14","5/7","1/7","6/7"],a:"5/7",w:"Penyebut sama, jadi 3/7 + 2/7 = 5/7."},
+ {q:"⅝ + ¼ = ?",o:["6/12","7/8","3/8","1"],a:"7/8",w:"1/4 = 2/8. Jadi 5/8 + 2/8 = 7/8."},
+ {q:"²⁄₁₁ + ³⁄₁₁ = ?",o:["5/22","5/11","1/11","6/11"],a:"5/11",w:"Penyebut sama, jadi 2/11 + 3/11 = 5/11."},
+ {q:"⅙ + ¼ = ?",o:["2/10","5/12","1/2","4/24"],a:"5/12",w:"KPK 6 dan 4 adalah 12. Jadi 2/12 + 3/12 = 5/12."},
+ {q:"⁴⁄₉ + ⅙ = ?",o:["5/15","11/18","7/18","1/2"],a:"11/18",w:"KPK 9 dan 6 adalah 18. Jadi 8/18 + 3/18 = 11/18."},
+ {q:"⅗ + ¹⁄₁₀ = ?",o:["4/15","7/10","6/10","3/15"],a:"7/10",w:"3/5 = 6/10. Jadi 6/10 + 1/10 = 7/10."},
+ {q:"⁵⁄₁₂ + ⅛ = ?",o:["6/20","13/24","11/24","5/24"],a:"13/24",w:"KPK 12 dan 8 adalah 24. Jadi 10/24 + 3/24 = 13/24."},
+ {q:"⅔ + ⅑ = ?",o:["3/10","7/9","5/9","1"],a:"7/9",w:"2/3 = 6/9. Jadi 6/9 + 1/9 = 7/9."},
+ {q:"¾ + ⅙ = ?",o:["4/10","11/12","5/12","1"],a:"11/12",w:"KPK 4 dan 6 adalah 12. Jadi 9/12 + 2/12 = 11/12."},
+ {q:"⅖ + ¹⁄₁₀ = ?",o:["3/15","1/2","5/10","2/15"],a:"1/2",w:"2/5 = 4/10. Jadi 4/10 + 1/10 = 5/10 = 1/2."},
+ {q:"⁷⁄₁₀ + ⅕ = ?",o:["8/15","9/10","7/15","1"],a:"9/10",w:"1/5 = 2/10. Jadi 7/10 + 2/10 = 9/10."},
+ {q:"⅓ + ⅛ = ?",o:["4/11","11/24","5/24","1/2"],a:"11/24",w:"KPK 3 dan 8 adalah 24. Jadi 8/24 + 3/24 = 11/24."},
+ {q:"⁵⁄₉ + ⅙ = ?",o:["6/15","13/18","11/18","7/18"],a:"13/18",w:"KPK 9 dan 6 adalah 18. Jadi 10/18 + 3/18 = 13/18."},
+ {q:"³⁄₁₀ + ⅖ = ?",o:["5/15","7/10","3/10","1/2"],a:"7/10",w:"2/5 = 4/10. Jadi 3/10 + 4/10 = 7/10."},
+ {q:"⁴⁄₇ + ¹⁄₁₄ = ?",o:["5/21","9/14","7/14","1/2"],a:"9/14",w:"4/7 = 8/14. Jadi 8/14 + 1/14 = 9/14."},
+ {q:"⅚ + ¹⁄₁₂ = ?",o:["6/18","11/12","7/12","1"],a:"11/12",w:"5/6 = 10/12. Jadi 10/12 + 1/12 = 11/12."},
+ {q:"¼ + ⅜ = ?",o:["4/12","5/8","1/2","3/8"],a:"5/8",w:"1/4 = 2/8. Jadi 2/8 + 3/8 = 5/8."},
+ {q:"²⁄₁₅ + ⅓ = ?",o:["3/18","7/15","5/15","1/3"],a:"7/15",w:"1/3 = 5/15. Jadi 2/15 + 5/15 = 7/15."},
+ {q:"⅝ + ⅙ = ?",o:["6/14","19/24","13/24","3/8"],a:"19/24",w:"KPK 8 dan 6 adalah 24. Jadi 15/24 + 4/24 = 19/24."},
+ {q:"⁷⁄₁₂ + ¼ = ?",o:["8/16","5/6","10/12","2/3"],a:"5/6",w:"1/4 = 3/12. Jadi 7/12 + 3/12 = 10/12 = 5/6."},
+ {q:"²⁄₉ + ⅙ = ?",o:["3/15","7/18","5/18","1/2"],a:"7/18",w:"KPK 9 dan 6 adalah 18. Jadi 4/18 + 3/18 = 7/18."},
+ {q:"³⁄₁₁ + ½ = ?",o:["4/13","17/22","13/22","5/11"],a:"17/22",w:"KPK 11 dan 2 adalah 22. Jadi 6/22 + 11/22 = 17/22."},
+ {q:"⅕ + ⅜ = ?",o:["4/13","23/40","11/40","3/8"],a:"23/40",w:"KPK 5 dan 8 adalah 40. Jadi 8/40 + 15/40 = 23/40."},
+ {q:"⁴⁄₁₅ + ⅙ = ?",o:["5/21","13/30","9/30","1/2"],a:"13/30",w:"KPK 15 dan 6 adalah 30. Jadi 8/30 + 5/30 = 13/30."}
+
+];
+let qs=[];
+const raceQs=[
+{q:"½ + ⅙ = ?",o:["2/7","2/3","1/3","4/6"],a:"2/3"},
+{q:"⅓ + ⅙ = ?",o:["1/2","2/9","1/9","2/6"],a:"1/2"},
+{q:"¼ + ⅛ = ?",o:["2/12","3/8","1/2","1/8"],a:"3/8"},
+{q:"⅔ + ⅙ = ?",o:["3/9","5/6","4/6","1/2"],a:"5/6"},
+{q:"⅖ + ⅕ = ?",o:["3/10","3/5","2/5","1/5"],a:"3/5"},
+{q:"⅜ + ⅛ = ?",o:["4/16","1/2","1/4","5/8"],a:"1/2"},
+{q:"⅚ + ⅙ = ?",o:["6/12","1","7/6","5/12"],a:"1"},
+{q:"⅕ + ½ = ?",o:["3/7","7/10","2/5","3/10"],a:"7/10"},
+{q:"¾ + ⅙ = ?",o:["4/10","11/12","5/12","1"],a:"11/12"},
+{q:"⅖ + ⅓ = ?",o:["3/8","11/15","7/15","2/5"],a:"11/15"},
+{q:"⅛ + ⅜ = ?",o:["4/16","1/2","3/8","5/8"],a:"1/2"},
+{q:"⅗ + ⅕ = ?",o:["4/10","4/5","3/10","1"],a:"4/5"}
+];
+const $=id=>document.getElementById(id);
+function show(id){clearInterval(timerId);["home","materi","kerjakan","hasil","raceSetup","race","leaderboard"].forEach(x=>$(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"});if(id==="hasil")renderResults();}
+let pi=0,ps=0,pc=0,pAnswered=false;
+function startPractice(){
+  const shuffled=[...questionBank];
+  for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
+  qs=shuffled.slice(0,10);
+  pi=0;ps=0;pc=0;show("kerjakan");renderPractice();
+}
+function renderPractice(){pAnswered=false;let q=qs[pi];$("pbar").style.width=(pi/qs.length*100)+"%";$("practiceArea").innerHTML=`<div class="question">${pi+1}. ${q.q}</div><div class="options">${q.o.map(o=>`<button onclick="answerPractice('${o}')">${o}</button>`).join("")}</div>`;$("pfb").textContent="";$("pfb").className="feedback";$("pnext").disabled=true;$("pnext").textContent=pi===qs.length-1?"Lihat Hasil":"Soal berikutnya →";}
+function answerPractice(o){if(pAnswered)return;pAnswered=true;let q=qs[pi],fb=$("pfb");if(o===q.a){ps+=10;pc++;fb.textContent="Benar! "+q.w;fb.className="feedback good";}else{fb.textContent="Belum tepat. Jawaban: "+q.a+". "+q.w;fb.className="feedback bad";}document.querySelectorAll("#practiceArea button").forEach(b=>b.disabled=true);$("pnext").disabled=false;}
+function finishPractice(){
+  const result={score:ps,correct:pc,total:qs.length,date:new Date().toLocaleString("id-ID")};
+  try{localStorage.setItem("rbkLast",JSON.stringify(result));}catch(e){console.warn("Hasil tidak dapat disimpan di browser ini.",e);}
+  $("pbar").style.width="100%";
+  $("practiceArea").innerHTML=`<div class="question">Skor latihan: ${ps}/100</div><p style="text-align:center">${ps>=80?"Hebat! Pemahamanmu sudah sangat baik.":ps>=50?"Bagus! Pelajari lagi pembahasan yang belum dikuasai.":"Terus berlatih dan baca kembali materi."}</p><div class="row"><button class="primary" onclick="startPractice()">Ulangi latihan</button><button onclick="show('hasil')">📊 Lihat hasil lengkap</button></div>`;
+  $("pfb").textContent="";$("pnext").disabled=true;$("pnext").textContent="Latihan selesai";
+}
+function nextPractice(){if(!pAnswered)return;if(pi<qs.length-1){pi++;renderPractice();}else{finishPractice();}}
+function renderResults(){let l=null,b=null;try{l=JSON.parse(localStorage.getItem("rbkLast"));b=JSON.parse(localStorage.getItem("rbkBest"));}catch(e){console.warn("Tidak dapat membaca hasil tersimpan.",e);}$("lastScore").textContent=l?l.score+"/100":"Belum ada";$("lastCorrect").textContent=l?l.correct+" dari "+l.total:"—";$("bestRace").textContent=b?b.score+" poin":"Belum ada";$("resultDetail").textContent=l?`Latihan terakhir: ${l.date}. Skor ${l.score}/100; jawaban benar ${l.correct} dari ${l.total}.`:"Selesaikan latihan untuk melihat hasil.";}
+let names=[],scores=[],counts=[],player=0,secs=60,rscore=0,rcount=0,ridx=0,timerId=null,questionLocked=false;
+function startTournament(){names=[$("n1").value.trim()||"Pemain 1",$("n2").value.trim()||"Pemain 2",$("n3").value.trim()||"Pemain 3"];scores=[0,0,0];counts=[0,0,0];player=0;show("race");beginPlayer();}
+function beginPlayer(){secs=60;rscore=0;rcount=0;ridx=Math.floor(Math.random()*raceQs.length);questionLocked=false;$("currentName").textContent=names[player];$("timer").textContent=secs;$("rscore").textContent=rscore;$("rcount").textContent=rcount;$("rbar").style.width="0%";$("rfb").textContent="";renderRace();clearInterval(timerId);timerId=setInterval(()=>{secs--;$("timer").textContent=secs;$("rbar").style.width=((60-secs)/60*100)+"%";if(secs<=0)finishPlayer();},1000);}
+function renderRace(){if(secs<=0)return;questionLocked=false;let q=raceQs[ridx%raceQs.length];$("raceArea").innerHTML=`<div class="question">${q.q}</div><div class="options">${q.o.map(o=>`<button onclick="answerRace('${o}')">${o}</button>`).join("")}</div><p class="small" style="text-align:center">Pemain: ${player+1} dari 3</p>`;}
+function answerRace(o){if(secs<=0||questionLocked)return;questionLocked=true;let q=raceQs[ridx%raceQs.length];if(o===q.a){rscore+=10;$("rfb").textContent="Benar! +10 poin";$("rfb").className="feedback good";}else{$("rfb").textContent="Belum tepat. Jawaban: "+q.a;$("rfb").className="feedback bad";}rcount++;$("rscore").textContent=rscore;$("rcount").textContent=rcount;ridx++;setTimeout(()=>{if(secs>0)renderRace();},450);}
+function finishPlayer(){clearInterval(timerId);timerId=null;scores[player]=rscore;counts[player]=rcount;$("raceArea").innerHTML=`<div class="question">Waktu ${names[player]} habis!</div><p style="text-align:center">Skor: <b>${rscore}</b> poin • Soal dijawab: <b>${rcount}</b></p>`;$("rfb").textContent="";if(player<2){$("raceArea").innerHTML+=`<div class="row"><button class="primary" onclick="nextPlayer()">Giliran ${names[player+1]} →</button></div><p class="small" style="text-align:center">Berikan perangkat kepada pemain berikutnya. Jangan tampilkan jawaban kepada pemain berikutnya sebelum gilirannya.</p>`;}else{finishTournament();}}
+function nextPlayer(){player++;beginPlayer();}
+function finishTournament(){let arr=names.map((name,i)=>({name,score:scores[i],count:counts[i],i})).sort((a,b)=>b.score-a.score||b.count-a.count);let old=null;try{old=JSON.parse(localStorage.getItem("rbkBest"));}catch(e){}let top=arr[0];if(!old||top.score>old.score)localStorage.setItem("rbkBest",JSON.stringify({score:top.score,name:top.name}));$("leaderRows").innerHTML=arr.map((x,i)=>`<tr><td class="rank">${i===0?"🥇":i===1?"🥈":"🥉"} ${i+1}</td><td>${escapeHtml(x.name)}</td><td><b>${x.score}</b></td><td>${x.count}</td></tr>`).join("");show("leaderboard");}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+</script></body></html>
