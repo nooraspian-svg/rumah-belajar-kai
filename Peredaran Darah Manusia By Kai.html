@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Petualangan Peredaran Darah - Rumah Belajar Kai</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef6fb;color:#19384e;font-family:Arial,sans-serif}header{background:#174d70;color:white;text-align:center;padding:18px 12px}h1{font-size:clamp(22px,4vw,32px);margin:0 0 6px}header p{margin:0}main{max-width:1100px;margin:16px auto;padding:0 12px}.controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}button{border:0;border-radius:10px;padding:11px 14px;background:#dfebf3;color:#19384e;font-weight:bold;cursor:pointer}button.active,button.primary{background:#176f9d;color:#fff}.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.8fr);gap:14px}.panel{background:#fff;border:1px solid #d7e5ee;border-radius:16px;padding:14px;box-shadow:0 4px 14px #19384e12}svg{width:100%;height:auto;display:block;background:#fbfdff;border-radius:12px}.moving-flow{pointer-events:none}.moving-flow polygon{stroke:#fff;stroke-width:1.5;stroke-linejoin:round}.vessel{fill:none;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}.blue{stroke:#268bd0}.red{stroke:#df4e55}.vessel.dim{opacity:.12}.vessel.active{stroke-width:16;filter:drop-shadow(0 0 3px #f3c85b)}.organ{cursor:pointer;stroke:#23445b;stroke-width:2.5}.organ:hover,.organ.selected{stroke:#efa900;stroke-width:5}.num{font-size:20px;font-weight:bold;fill:#19384e;pointer-events:none}.label{font-size:16px;font-weight:bold;fill:#19384e}.smalllabel{font-size:13px;fill:#425f73}.info h2{margin:8px 0}.info p{line-height:1.55}.tag{display:inline-block;background:#e8f3fa;color:#176f9d;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:bold}.card{background:#f2f8fb;border-radius:12px;padding:11px;margin-top:10px;line-height:1.5}.legend{display:flex;gap:15px;flex-wrap:wrap;font-size:13px;margin:10px 4px}.swatch{display:inline-block;width:20px;height:8px;border-radius:8px;margin-right:5px}.feedback{min-height:24px;font-weight:bold;margin-top:8px}@media(max-width:760px){.layout{grid-template-columns:1fr}}
+</style></head><body>
+<header><h1>🫀 Petualangan Peredaran Darah Manusia</h1><p>Rumah Belajar Kai · Amati arah aliran darah dan kenali bagian-bagiannya</p></header>
+<main><div class="controls"><button id="all" class="active">Peredaran Lengkap</button><button id="small">Peredaran Kecil</button><button id="large">Peredaran Besar</button><button id="animate" class="primary">▶ Jalankan Aliran</button><button id="pause">Ⅱ Jeda</button></div>
+<div class="layout"><section class="panel">
+<svg viewBox="0 0 660 660" role="img" aria-label="Diagram peredaran darah manusia dengan jantung di tengah, paru-paru di atas jantung, kepala dan tangan di bagian atas, serta tubuh di bawah">
+<defs><marker id="ba" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#268bd0"/></marker><marker id="ra" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#df4e55"/></marker></defs>
+<!-- Head/arms and systemic upper return/supply -->
+<rect x="245" y="28" width="170" height="48" rx="13" fill="#fff" stroke="#b9cbd6" stroke-width="2"/><text x="330" y="58" text-anchor="middle" class="label">9. KEPALA &amp; TANGAN</text>
+<!-- Paru-paru digambar sebagai satu organ berpasangan dengan trakea dan bronkus -->
+<path d="M330 112 L330 157 M330 145 L298 174 M330 145 L362 174" fill="none" stroke="#7893a5" stroke-width="11" stroke-linecap="round"/>
+<path class="organ" data-part="lungs" d="M294 151 C267 145 245 166 242 196 C238 229 258 249 284 238 C303 230 310 204 307 180 C305 166 302 157 294 151Z" fill="#f2a0ad"/>
+<path class="organ" data-part="lungs" d="M366 151 C393 145 415 166 418 196 C422 229 402 249 376 238 C357 230 350 204 353 180 C355 166 358 157 366 151Z" fill="#f2a0ad"/>
+<path d="M298 174 L282 193 M362 174 L378 193" fill="none" stroke="#7893a5" stroke-width="7" stroke-linecap="round"/>
+<text x="330" y="100" text-anchor="middle" class="label">8. PARU-PARU</text>
+<!-- Pulmonary circulation: RV -> lungs -> LA -->
+<path id="pulmBlue" class="vessel blue" d="M278 405 L250 365 Q230 335 230 290 L230 245 Q230 220 255 205 L280 190" marker-end="url(#ba)"/>
+<path id="pulmRed" class="vessel red" d="M380 190 L405 210 Q430 230 430 255 L430 292 Q430 330 402 360 L382 405" marker-end="url(#ra)"/>
+<!-- systemic circulation: body -> vena cava -> RA -->
+<path id="sysBlue" class="vessel blue" d="M155 555 L95 555 Q58 555 58 515 L58 330 Q58 280 95 260 L175 260 Q205 260 205 300 L205 355 Q205 385 245 405" marker-end="url(#ba)"/>
+<!-- LV -> aorta -> body, branching to head/arms -->
+<path id="sysRed" class="vessel red" d="M415 405 Q455 385 455 350 L455 300 Q455 260 490 260 L565 260 Q602 260 602 300 L602 515 Q602 555 565 555 L505 555" marker-end="url(#ra)"/>
+<path class="vessel red" d="M490 260 L490 100 Q490 82 470 82 L415 52" stroke-width="8" marker-end="url(#ra)"/>
+<path class="vessel blue" d="M175 260 L175 100 Q175 82 195 82 L245 52" stroke-width="8" marker-end="url(#ba)"/>
+<!-- Panah bergerak mengikuti empat jalur aliran darah -->
+<g id="flowSmall" class="moving-flow" aria-hidden="true">
+  <!-- Peredaran kecil: serambi kanan → bilik kanan → arteri pulmonalis → paru-paru → vena pulmonalis → serambi kiri -->
+  <g fill="#111111">
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="3.2s" begin="0s" repeatCount="indefinite" rotate="auto" path="M278 405 L250 365 Q230 335 230 290 L230 245 Q230 220 255 205 L280 190"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="3.2s" begin="-1.05s" repeatCount="indefinite" rotate="auto" path="M278 405 L250 365 Q230 335 230 290 L230 245 Q230 220 255 205 L280 190"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="3.2s" begin="-2.1s" repeatCount="indefinite" rotate="auto" path="M278 405 L250 365 Q230 335 230 290 L230 245 Q230 220 255 205 L280 190"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="3.2s" repeatCount="indefinite" rotate="auto" path="M380 190 L405 210 Q430 230 430 255 L430 292 Q430 330 402 360 L382 405"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="3.2s" begin="-1.05s" repeatCount="indefinite" rotate="auto" path="M380 190 L405 210 Q430 230 430 255 L430 292 Q430 330 402 360 L382 405"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="3.2s" begin="-2.1s" repeatCount="indefinite" rotate="auto" path="M380 190 L405 210 Q430 230 430 255 L430 292 Q430 330 402 360 L382 405"/></polygon>
+  </g>
+</g>
+<g id="flowLarge" class="moving-flow" aria-hidden="true">
+  <!-- Peredaran besar: bilik kiri → seluruh tubuh → serambi kanan -->
+  <g fill="#111111">
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="5s" repeatCount="indefinite" rotate="auto" path="M415 405 Q455 385 455 350 L455 300 Q455 260 490 260 L565 260 Q602 260 602 300 L602 515 Q602 555 565 555 L505 555"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="5s" begin="-1.25s" repeatCount="indefinite" rotate="auto" path="M415 405 Q455 385 455 350 L455 300 Q455 260 490 260 L565 260 Q602 260 602 300 L602 515 Q602 555 565 555 L505 555"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="5s" begin="-2.5s" repeatCount="indefinite" rotate="auto" path="M415 405 Q455 385 455 350 L455 300 Q455 260 490 260 L565 260 Q602 260 602 300 L602 515 Q602 555 565 555 L505 555"/></polygon>
+    <!-- Cabang arteri menuju kepala dan kedua tangan -->
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="4.2s" repeatCount="indefinite" rotate="auto" path="M415 405 Q455 385 455 350 L455 300 Q455 260 490 260 L490 100 Q490 82 470 82 L415 52"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="4.2s" begin="-1.4s" repeatCount="indefinite" rotate="auto" path="M415 405 Q455 385 455 350 L455 300 Q455 260 490 260 L490 100 Q490 82 470 82 L415 52"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="4.2s" begin="-2.8s" repeatCount="indefinite" rotate="auto" path="M415 405 Q455 385 455 350 L455 300 Q455 260 490 260 L490 100 Q490 82 470 82 L415 52"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="5s" repeatCount="indefinite" rotate="auto" path="M155 555 L95 555 Q58 555 58 515 L58 330 Q58 280 95 260 L175 260 Q205 260 205 300 L205 355 Q205 385 245 405"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="5s" begin="-1.25s" repeatCount="indefinite" rotate="auto" path="M155 555 L95 555 Q58 555 58 515 L58 330 Q58 280 95 260 L175 260 Q205 260 205 300 L205 355 Q205 385 245 405"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="5s" begin="-2.5s" repeatCount="indefinite" rotate="auto" path="M155 555 L95 555 Q58 555 58 515 L58 330 Q58 280 95 260 L175 260 Q205 260 205 300 L205 355 Q205 385 245 405"/></polygon>
+    <!-- Darah dari kepala dan tangan kembali melalui vena kava atas -->
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="4.2s" repeatCount="indefinite" rotate="auto" path="M245 52 L195 82 Q175 82 175 100 L175 260 Q205 260 205 300 L205 355 Q205 385 245 405"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="4.2s" begin="-1.4s" repeatCount="indefinite" rotate="auto" path="M245 52 L195 82 Q175 82 175 100 L175 260 Q205 260 205 300 L205 355 Q205 385 245 405"/></polygon>
+    <polygon points="-10,-7 10,0 -10,7"><animateMotion dur="4.2s" begin="-2.8s" repeatCount="indefinite" rotate="auto" path="M245 52 L195 82 Q175 82 175 100 L175 260 Q205 260 205 300 L205 355 Q205 385 245 405"/></polygon>
+  </g>
+</g>
+<!-- Pulmonary vessel labels -->
+<circle class="organ" data-part="pulmonaryArtery" cx="232" cy="240" r="22" fill="#dceffc"/><text x="232" y="247" text-anchor="middle" class="num">10</text>
+<circle class="organ" data-part="pulmonaryVein" cx="428" cy="240" r="22" fill="#fde6e7"/><text x="428" y="247" text-anchor="middle" class="num">11</text>
+<!-- Heart chambers, four clearly separate spaces -->
+<path class="organ" data-part="rightAtrium" d="M260 345 Q225 320 210 350 Q195 385 260 420 L320 390 L320 345Z" fill="#64addb"/>
+<path class="organ" data-part="leftAtrium" d="M340 345 L400 345 Q435 320 450 350 Q465 385 400 420 L340 390Z" fill="#ed999f"/>
+<path class="organ" data-part="rightVentricle" d="M260 420 L320 390 L330 505 Q280 515 240 475 Q220 450 260 420Z" fill="#268bd0"/>
+<path class="organ" data-part="leftVentricle" d="M340 390 L400 420 Q440 450 420 475 Q380 515 330 505 L340 390Z" fill="#df4e55"/>
+<text x="260" y="382" text-anchor="middle" class="num">1</text><text x="400" y="382" text-anchor="middle" class="num">2</text><text x="280" y="462" text-anchor="middle" class="num">3</text><text x="380" y="462" text-anchor="middle" class="num">4</text><text x="330" y="535" text-anchor="middle" class="label">JANTUNG</text>
+<!-- Vena/artery labels on systemic loops -->
+<circle class="organ" data-part="vein" cx="72" cy="430" r="23" fill="#dceffc"/><text x="72" y="437" text-anchor="middle" class="num">5</text>
+<circle class="organ" data-part="artery" cx="588" cy="430" r="23" fill="#fde6e7"/><text x="588" y="437" text-anchor="middle" class="num">6</text>
+<circle class="organ" data-part="aorta" cx="470" cy="330" r="23" fill="#fde6e7"/><text x="470" y="337" text-anchor="middle" class="num">12</text>
+<!-- Body is connected to both systemic vessels -->
+<rect class="organ" data-part="body" x="155" y="555" width="350" height="62" rx="16" fill="#f5e6d9"/><text x="330" y="592" text-anchor="middle" class="label">7. TUBUH</text>
+<text x="330" y="645" text-anchor="middle" class="smalllabel">Tekan nomor atau organ pada gambar untuk membaca keterangannya.</text>
+</svg>
+<div class="legend"><span><i class="swatch" style="background:#df4e55"></i>Merah: kaya oksigen (O₂)</span><span><i class="swatch" style="background:#268bd0"></i>Biru: miskin oksigen, banyak CO₂</span></div>
+</section>
+<aside class="panel info" aria-live="polite"><span class="tag" id="modeTag">Peredaran lengkap</span><h2 id="partTitle">Pilih bagian pada diagram</h2><p id="partText">Tekan salah satu nomor atau organ. Fungsi bagian tersebut akan muncul di sini.</p>
+<div class="card"><b>Peredaran kecil</b><br>Serambi kanan → bilik kanan → arteri pulmonalis → paru-paru → vena pulmonalis → serambi kiri.</div>
+<div class="card"><b>Peredaran besar</b><br>Bilik kiri → aorta → arteri → seluruh tubuh → vena → vena kava → serambi kanan.</div>
+<div class="card"><b>Ingat!</b><br>Arteri membawa darah keluar dari jantung, sedangkan vena membawa darah kembali ke jantung. Arteri pulmonalis membawa darah miskin oksigen; vena pulmonalis membawa darah kaya oksigen.</div></aside></div>
+<section class="panel" style="margin-top:14px"><h2>🎯 Cek pemahaman</h2><p>Darah dari bilik kanan menuju paru-paru termasuk peredaran apa?</p><div class="controls"><button onclick="check('small')">Peredaran kecil</button><button onclick="check('large')">Peredaran besar</button></div><div id="feedback" class="feedback"></div></section></main>
+<script>
+const parts={
+lungs:["8. Paru-paru","Paru-paru adalah sepasang organ pernapasan di rongga dada. Di sinilah darah melepaskan karbon dioksida (CO₂) dan mengambil oksigen (O₂). Darah kaya oksigen kembali ke jantung melalui vena pulmonalis."],
+rightAtrium:["1. Serambi kanan","Menerima darah miskin oksigen dari seluruh tubuh melalui vena kava, lalu meneruskannya ke bilik kanan."],
+leftAtrium:["2. Serambi kiri","Menerima darah kaya oksigen dari paru-paru melalui vena pulmonalis, lalu meneruskannya ke bilik kiri."],
+rightVentricle:["3. Bilik kanan","Memompa darah miskin oksigen menuju paru-paru melalui arteri pulmonalis. Ini awal peredaran darah kecil."],
+leftVentricle:["4. Bilik kiri","Memompa darah kaya oksigen ke seluruh tubuh melalui aorta. Ini awal peredaran darah besar."],
+vein:["5. Vena","Pembuluh darah yang membawa darah kembali menuju jantung. Vena kava membawa darah miskin oksigen dari tubuh ke serambi kanan."],
+artery:["6. Arteri","Pembuluh darah yang membawa darah keluar dari jantung. Arteri pada peredaran besar membawa darah kaya oksigen ke tubuh."],
+body:["7. Tubuh","Seluruh tubuh menerima oksigen dan zat makanan. Setelah digunakan sel, darah membawa karbon dioksida kembali ke jantung."],
+head:["9. Kepala dan tangan","Bagian tubuh yang menerima darah kaya oksigen melalui cabang pembuluh nadi dan mengembalikan darah melalui pembuluh balik."],
+pulmonaryArtery:["10. Arteri pulmonalis","Membawa darah miskin oksigen dari bilik kanan menuju paru-paru. Ini pengecualian: arteri pulmonalis membawa darah miskin oksigen."],
+pulmonaryVein:["11. Vena pulmonalis","Membawa darah kaya oksigen dari paru-paru menuju serambi kiri. Ini pengecualian: vena pulmonalis membawa darah kaya oksigen."],
+aorta:["12. Aorta","Pembuluh nadi terbesar yang membawa darah kaya oksigen dari bilik kiri menuju seluruh tubuh."]
+};
+document.querySelectorAll('[data-part]').forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('[data-part]').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');let d=parts[el.dataset.part];document.getElementById('partTitle').textContent=d[0];document.getElementById('partText').textContent=d[1]}));
+function mode(m){['sysBlue','pulmBlue','pulmRed','sysRed'].forEach(id=>document.getElementById(id).classList.remove('dim','active'));document.getElementById('flowSmall').style.display=(m==='all'||m==='small')?'':'none';document.getElementById('flowLarge').style.display=(m==='all'||m==='large')?'':'none';if(m==='small'){['sysBlue','sysRed'].forEach(id=>document.getElementById(id).classList.add('dim'));['pulmBlue','pulmRed'].forEach(id=>document.getElementById(id).classList.add('active'));document.getElementById('modeTag').textContent='Peredaran darah kecil'}else if(m==='large'){['pulmBlue','pulmRed'].forEach(id=>document.getElementById(id).classList.add('dim'));['sysBlue','sysRed'].forEach(id=>document.getElementById(id).classList.add('active'));document.getElementById('modeTag').textContent='Peredaran darah besar'}else document.getElementById('modeTag').textContent='Peredaran lengkap'}
+function activate(id){document.querySelectorAll('.controls button').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active')}
+document.getElementById('all').onclick=()=>{mode('all');activate('all')};document.getElementById('small').onclick=()=>{mode('small');activate('small')};document.getElementById('large').onclick=()=>{mode('large');activate('large')};
+const diagram=document.querySelector('svg');
+diagram.pauseAnimations();
+document.getElementById('animate').onclick=()=>diagram.unpauseAnimations();
+document.getElementById('pause').onclick=()=>diagram.pauseAnimations();
+function check(v){let f=document.getElementById('feedback');if(v==='small'){f.textContent='Benar! Bilik kanan → paru-paru → serambi kiri adalah peredaran kecil.';f.style.color='#23866b'}else{f.textContent='Belum tepat. Peredaran kecil adalah jalur jantung menuju paru-paru lalu kembali ke jantung.';f.style.color='#b64a50'}}
+</script></body></html>
